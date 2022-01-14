@@ -129,5 +129,7 @@ export class CustomerService{
             return error;
         }
     }
+    async updateCustomer(updateCustomer: Customer) {
 
+    }
 }
