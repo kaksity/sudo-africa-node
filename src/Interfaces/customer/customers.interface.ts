@@ -21,6 +21,7 @@ interface Identity{
     number: string
 }
 
+
 interface Officer {
     id?: string,
     firstName: string,
@@ -50,6 +51,16 @@ interface BillingAddress{
     postalCode: string
 }
 
+interface Pagination{
+    page: number,
+    pages: number,
+    limit: number
+}
+
+export interface ReadCustomersWithPagination{
+    data: Array<ReadIndividualCustomer | ReadCompanyCustomer>,
+    pagination: Pagination
+}
 
 export interface CreateCustomer{
     type: CustomerType,
@@ -91,17 +102,6 @@ export interface ReadIndividualCustomer {
     individual: Individual,
     status: CustomerStatus,
     billingAddress: BillingAddress
-}
-
-interface Error{
-    property: string,
-    children: [],
-    constraint:{
-        isNotEmpty?: string,
-        isString?: string,
-        isObject?: string,
-        isIn?: string,
-    }
 }
 
 export interface ReadCompanyCustomer {

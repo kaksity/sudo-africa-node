@@ -1,5 +1,5 @@
 import { autoInjectable, inject } from 'tsyringe';
-import { CustomerType, CreateCustomer, UpdateCustomer, CreateIndividualCustomer, CreateCompanyCustomer, ReadIndividualCustomer, ReadCompanyCustomer } from './customers.interface';
+import { CustomerType, CreateCustomer, UpdateCustomer, CreateIndividualCustomer, CreateCompanyCustomer, ReadIndividualCustomer, ReadCompanyCustomer } from '../../Interfaces/customer/customers.interface';
 import { HttpClient } from '../http/index';
 
 @autoInjectable()
@@ -44,9 +44,8 @@ export class CustomerService{
             return error;   
         }
     }
-    async createCompanyCustomer(newCompanyCustomer: CreateCompanyCustomer): Promise<ReadCompanyCustomer> {
-        try {
-            let response = await this._httpClient.post('/customers', newCompanyCustomer); 
+    createCompanyCustomer(newCompanyCustomer: CreateCompanyCustomer): Promise<ReadCompanyCustomer> {
+        return this._httpClient.post('/customers', newCompanyCustomer).then(response => {
             let data = response.data;            
             let result: ReadCompanyCustomer = {
                 id: data._id,
@@ -75,16 +74,15 @@ export class CustomerService{
                 },
                 status: data.status
             }
-            return result;
-
-        } catch (error) {
-            return error;   
-        }
+            return Promise.resolve(result);
+        }).catch(error => {
+            return Promise.reject(error);
+        }); 
     }
-    async getAllCustomers(page: number = 1, limit: number = 25): Promise<Array<ReadIndividualCustomer | ReadCompanyCustomer>> {
+    getAllCustomers(page: number = 1, limit: number = 25): Promise<Array<ReadIndividualCustomer | ReadCompanyCustomer>> {
         return this._httpClient.get(`/customers?pages=${page}&limit=${limit}`).then(response => {
             let data:any[] = response.data;
-            // console.log(data);
+            console.log(data);
             let results: Array<ReadCompanyCustomer | ReadIndividualCustomer> = [];
             for(let i=0; i < data.length; i++){
                 if (data[i].type == CustomerType.INDIVIDUAL) {
@@ -146,14 +144,14 @@ export class CustomerService{
                     results.push(record);
                 }
             }
-            return results;
+            return Promise.resolve(results);
         }).catch(error => {
-            return error;
+            return Promise.reject(error);
         });            
     }
     async getCustomerById(customerId: string): Promise<ReadIndividualCustomer | ReadCompanyCustomer> {
         try {
-            let response: any = await this._httpClient.get(`/customers/${customerId}`).then().catch();
+            let response: any = await this._httpClient.get(`/customers/${customerId}`);
             let data = response.data;
             if ( data.type == CustomerType.INDIVIDUAL) {
                 let individualCustomer: ReadIndividualCustomer = {
