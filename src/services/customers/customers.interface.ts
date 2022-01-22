@@ -21,19 +21,22 @@ interface Identity{
     number: string
 }
 
-interface Company{
+interface Officer {
+    id?: string,
     firstName: string,
-    lastName: string,
-    otherNames: string,
-    dob: Date,
-    identity: Identity
+    lastName: string
+}
+interface Company{
+    id?: string,
+    name: string,
+    officer: Officer
 }
 
 interface Individual{
     firstName: string,
     lastName: string,
-    otherNames: string,
-    dob: string,
+    otherNames?: string,
+    dob?: string,
     id?: string,
     identity?: Identity
 }
@@ -47,9 +50,8 @@ interface BillingAddress{
     postalCode: string
 }
 
-export interface Customer{
-    id?: string,
-    business?: string,
+
+export interface CreateCustomer{
     type: CustomerType,
     name: string,
     phoneNumber: string,
@@ -57,4 +59,71 @@ export interface Customer{
     individual: Company | Individual,
     status: CustomerStatus,
     billingAddress: BillingAddress
+}
+
+export interface CreateIndividualCustomer {
+    type: CustomerType.INDIVIDUAL,
+    name: string,
+    phoneNumber: string,
+    emailAddress: string,
+    individual: Individual,
+    status: CustomerStatus,
+    billingAddress: BillingAddress
+}
+
+export interface CreateCompanyCustomer {
+    type: CustomerType.COMPANY,
+    name: string,
+    phoneNumber: string,
+    emailAddress: string,
+    company: Company,
+    status: CustomerStatus,
+    billingAddress: BillingAddress
+}
+
+export interface ReadIndividualCustomer {
+    id: string,
+    business: string,
+    type: CustomerType,
+    name: string,
+    phoneNumber: string,
+    emailAddress: string,
+    individual: Individual,
+    status: CustomerStatus,
+    billingAddress: BillingAddress
+}
+
+interface Error{
+    property: string,
+    children: [],
+    constraint:{
+        isNotEmpty?: string,
+        isString?: string,
+        isObject?: string,
+        isIn?: string,
+    }
+}
+
+export interface ReadCompanyCustomer {
+    id: string,
+    business: string,
+    type: CustomerType.COMPANY,    
+    name: string,
+    phoneNumber: string,
+    emailAddress: string,
+    company: Company,
+    status: CustomerStatus,
+    billingAddress: BillingAddress
+}
+
+export interface UpdateCustomer{
+    id: string,
+    business?: string,
+    type: CustomerType,
+    name: string,
+    phoneNumber?: string,
+    emailAddress?: string,
+    individual: Company | Individual,
+    status: CustomerStatus,
+    billingAddress?: BillingAddress
 }

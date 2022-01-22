@@ -46,4 +46,12 @@ export class HttpClient{
             return error;
         });
     }
+    public put(url: string, data:any)
+    {
+        return this._instance.put(url,data).then(data => {
+            return data;
+        }).catch(error => {
+            return error;
+        })
+    }
 }
