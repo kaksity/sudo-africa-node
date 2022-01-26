@@ -14,15 +14,13 @@
    },
    "dependencies": {
       "axios": "^0.24.0",
-      "mysql": "^2.14.1",
       "reflect-metadata": "^0.1.10",
-      "tsyringe": "^4.6.0",
-      "typeorm": "0.2.41"
+      "tsyringe": "^4.6.0"
    },
    "scripts": {
       "start": "ts-node ./src/index.ts",
       "test": "mocha -r ts-node/register **/*.test.ts",
       "test-watch": "nodemon --exec \"npm test\"",
       "compile": "rm -r build && tsc"
-    }
+   }
 }
