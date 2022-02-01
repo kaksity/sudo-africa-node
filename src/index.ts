@@ -17,65 +17,41 @@ class Sudo{
     }    
 }
 
+export default Sudo;
 
-(() => {
-    // let secretKey = "test 123";
-    let secretKey =process.env.SECRET_KEY as string;
+// (() => {
+//     // let secretKey = "test 123";
+//     let secretKey =process.env.SECRET_KEY as string;
 
-    let sudoInstance = new Sudo(secretKey);
+//     let sudoInstance = new Sudo(secretKey);
 
-    try {
+//     try {
         
-        // let companyCustomer: CreateCompanyCustomer = {
-        //     type: CustomerType.COMPANY,
-        //     name: "Haigha Technology",
-        //     emailAddress: "",
-        //     phoneNumber: "",
-        //     company: {
-        //         name: "Haigha Technology",
-        //         officer: {
-        //             firstName: "Harun",
-        //             lastName: "Abubakar"
-        //         }
-        //     },
-        //     status: CustomerStatus.ACTIVE,
-        //     billingAddress: {
-        //         line1: "Along Bama Road",
-        //         city: "Maiduguri",
-        //         state: "Borno",
-        //         country: "Nigeria",
-        //         postalCode: "12345"
-        //     }
-        // }
+        let companyCustomer: CreateCompanyCustomer = {
+            type: CustomerType.COMPANY,
+            name: "Haigha Technology",
+            emailAddress: "",
+            phoneNumber: "",
+            company: {
+                name: "Haigha Technology",
+                officer: {
+                    firstName: "Harun",
+                    lastName: "Abubakar"
+                }
+            },
+            status: CustomerStatus.ACTIVE,
+            billingAddress: {
+                line1: "Along Bama Road",
+                city: "Maiduguri",
+                state: "Borno",
+                country: "Nigeria",
+                postalCode: "12345"
+            }
+        }
         
-        // sudoInstance.customers.createCompanyCustomer(companyCustomer).then(results => {
-        //     console.log(results);
-        // }).catch(error => {
-        //     console.log(error);
-        // })
-        sudoInstance.customers.getAllCustomers(1,25).then(results => {
-            console.log(`-----------------Getting all the customers--------------------------`)
-            console.log(results);;
-        }).catch(error => {
-            console.log(error);
-        });
-        
-        
-        // sudoInstance.customers.getCustomerById('61e02642e5b97959404c324f').then(results => {
-        //     console.log(`---------------------Get a single individual customer------------------`);
-        //     console.log(results);
-        // }).catch(error => {
-        //     console.log(error);
-        // });
-        // sudoInstance.customers.getCustomerById('61e3273de4d97fa8915b3749').then(results => {
-        //     console.log(`---------------------Get a single company customer------------------`);
-        //     console.log(results);
-        // }).catch(error => {
-        //     console.log(error);
-        // });
-    } catch (error) {
-        console.log(error);
-    }
-})()
-
-let name = "Name"
+//         // sudoInstance.customers.createCompanyCustomer(companyCustomer).then(results => {
+//         //     console.log(results);
+//         // }).catch(error => {
+//         //     console.log(error);
+//         // })
+//       
