@@ -11,9 +11,8 @@ export class CustomerService{
         this._httpClient = httpClient;    
     }
     
-    async createIndividualCustomer(newIndividualCustomer: CreateIndividualCustomer): Promise<ReadIndividualCustomer> {
-        try {
-            let response = await this._httpClient.post('/customers', newIndividualCustomer); 
+    createIndividualCustomer(newIndividualCustomer: CreateIndividualCustomer): Promise<ReadIndividualCustomer> {
+        return this._httpClient.post('/customers', newIndividualCustomer).then(response => {
             let data = response.data;            
             let result: ReadIndividualCustomer = {
                 id: data._id,
@@ -38,11 +37,10 @@ export class CustomerService{
                 },
                 status: data.status
             }
-            return result;
-
-        } catch (error) {
-            return error;   
-        }
+            return Promise.resolve(result);
+        }).catch(error => {
+            return Promise.reject(error);
+        }); 
     }
     createCompanyCustomer(newCompanyCustomer: CreateCompanyCustomer): Promise<ReadCompanyCustomer> {
         return this._httpClient.post('/customers', newCompanyCustomer).then(response => {
@@ -82,7 +80,6 @@ export class CustomerService{
     getAllCustomers(page: number = 1, limit: number = 25): Promise<Array<ReadIndividualCustomer | ReadCompanyCustomer>> {
         return this._httpClient.get(`/customers?pages=${page}&limit=${limit}`).then(response => {
             let data:any[] = response.data;
-            console.log(data);
             let results: Array<ReadCompanyCustomer | ReadIndividualCustomer> = [];
             for(let i=0; i < data.length; i++){
                 if (data[i].type == CustomerType.INDIVIDUAL) {
