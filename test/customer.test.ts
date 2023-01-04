@@ -10,54 +10,54 @@ describe('All Customer Operations',() => {
 
     let sudoInstance = new Sudo(secretKey);
 
-    // it('Should create a new Individual Customer', async() => {
-    //     let indivudalCustomer: CreateIndividualCustomer = {
-    //         type: CustomerType.INDIVIDUAL,
-    //         name: "Test Individual",
-    //         phoneNumber: "",
-    //         emailAddress: "",
-    //         individual:{
-    //             firstName: "Test I",
-    //             lastName: "Test I"
-    //         },
-    //         status: CustomerStatus.ACTIVE,
-    //         billingAddress: {
-    //             line1: "Test I Line 1",
-    //             city: "Test I City 1",
-    //             state: "Borno",
-    //             country: "Nigeria",
-    //             postalCode: "12345"
-    //         }
-    //     };
-    //     let results = await sudoInstance.customers.createIndividualCustomer(indivudalCustomer);
-    //     expect(results).to.be.an('object');
-    // });
+    it('Should create a new Individual Customer', async() => {
+        let individualCustomer: CreateIndividualCustomer = {
+            type: CustomerType.INDIVIDUAL,
+            name: "Test Individual",
+            phoneNumber: "",
+            emailAddress: "",
+            individual:{
+                firstName: "Test I",
+                lastName: "Test I"
+            },
+            status: CustomerStatus.ACTIVE,
+            billingAddress: {
+                line1: "Test I Line 1",
+                city: "Test I City 1",
+                state: "Borno",
+                country: "Nigeria",
+                postalCode: "12345"
+            }
+        };
+        let results = await sudoInstance.customers.createIndividualCustomerRecord(individualCustomer);
+        expect(results).to.be.an('object');
+    });
 
-    // it('Should create a new Company Customer', async() => {
-    //     let companyCustomer: CreateCompanyCustomer = {
-    //         type: CustomerType.COMPANY,
-    //         name: "Test Company",
-    //         emailAddress: "",
-    //         phoneNumber: "",
-    //         company: {
-    //             name: "Test Company",
-    //             officer: {
-    //                 firstName: "Test C",
-    //                 lastName: "Test C"
-    //             }
-    //         },
-    //         status: CustomerStatus.ACTIVE,
-    //         billingAddress: {
-    //             line1: "Test C Line 1",
-    //             city: "Test C City 1",
-    //             state: "Borno",
-    //             country: "Nigeria",
-    //             postalCode: "12345"
-    //         }
-    //     } 
-    //     let createdCompanyCustomer = await sudoInstance.customers.createCompanyCustomer(companyCustomer);
-    //     expect(createdCompanyCustomer).to.be.an('object');
-    // });
+    it('Should create a new Company Customer', async() => {
+        let companyCustomer: CreateCompanyCustomer = {
+            type: CustomerType.COMPANY,
+            name: "Test Company",
+            emailAddress: "",
+            phoneNumber: "",
+            company: {
+                name: "Test Company",
+                officer: {
+                    firstName: "Test C",
+                    lastName: "Test C"
+                }
+            },
+            status: CustomerStatus.ACTIVE,
+            billingAddress: {
+                line1: "Test C Line 1",
+                city: "Test C City 1",
+                state: "Borno",
+                country: "Nigeria",
+                postalCode: "12345"
+            }
+        } 
+        let createdCompanyCustomer = await sudoInstance.customers.createCompanyCustomerRecord(companyCustomer);
+        expect(createdCompanyCustomer).to.be.an('object');
+    });
 
     it('Should Get all the Customers', async() => {
         

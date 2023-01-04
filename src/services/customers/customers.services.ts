@@ -33,7 +33,7 @@ export class CustomerService{
             let { data } = await this._httpClient.get(`/customers?pages=${page}&limit=${limit}`);
             let results: Array<ReadCompanyCustomer | ReadIndividualCustomer> = [];
             data.forEach(customer => {
-                results.push(this.processCustomerRecord(customer))
+                results.push(this.processCustomerRecord(customer));
             });
             return Promise.resolve(results);
         } catch (error) {
@@ -67,11 +67,11 @@ export class CustomerService{
                 lastName: customer.individual.lastName,
                 otherNames: customer.individual.otherNames,
                 dob: (customer.individual.dob == null) ? '' : customer.individual.dob,
-                identity: {
-                    id: customer.individual.identity._id,
-                    type: customer.individual.identity.type,
-                    number: customer.individual.identity.number
-                }
+                // identity: {
+                //     id: customer.individual.identity._id,
+                //     type: customer.individual.identity.type,
+                //     number: customer.individual.identity.number
+                // }
             },
             billingAddress:{
                 id: customer.billingAddress._id,
