@@ -50,18 +50,6 @@ interface BillingAddress{
     country: string,
     postalCode: string
 }
-
-interface Pagination{
-    page: number,
-    pages: number,
-    limit: number
-}
-
-export interface ReadCustomersWithPagination{
-    data: Array<ReadIndividualCustomer | ReadCompanyCustomer>,
-    pagination: Pagination
-}
-
 export interface CreateCustomer{
     type: CustomerType,
     name: string,

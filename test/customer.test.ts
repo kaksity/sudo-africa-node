@@ -61,9 +61,9 @@ describe('All Customer Operations',() => {
 
     it('Should Get all the Customers', async() => {
         
-        let allCustomers = await sudoInstance.customers.getAllCustomerRecords();
-        expect(allCustomers).to.be.an('array');
-        
+        let result = await sudoInstance.customers.getAllCustomerRecords();
+        expect(result).to.be.an('object').to.have.property('data')
+        expect(result).to.be.an('object').to.have.property('pagination');
     });
     
     it('Should Get a Company customer', async() => {

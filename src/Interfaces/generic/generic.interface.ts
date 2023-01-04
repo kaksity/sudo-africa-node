@@ -8,6 +8,12 @@ interface MessageObject {
         isIn?: string;
     };
 }
+export interface Pagination{
+    total: number
+    page: number,
+    pages: number,
+    limit: number
+}
 
 export interface Error {
     statusCode: number,

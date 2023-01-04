@@ -20,14 +20,15 @@ export class HttpClient{
 
     private initializeResponseInterceptor() {
         this._instance.interceptors.response.use(response => {
-            return Promise.resolve(response.data);
+            return Promise.resolve(response);
         },error => {
             return Promise.reject(error.response.data);
         });
     }
     
     public get(url: string){
-        return this._instance.get(url).then(data => {
+        return this._instance.get(url).then(response => {
+            const { data } = response
             return Promise.resolve(data);
         }).catch(error => {
             return Promise.reject(error);
@@ -36,7 +37,8 @@ export class HttpClient{
 
     public post(url: string, data: any)
     {
-        return this._instance.post(url,data).then(data => {
+        return this._instance.post(url,data).then(response => {
+            const { data } = response
             return Promise.resolve(data);
         }).catch(error => {
             return Promise.reject(error);
@@ -44,7 +46,8 @@ export class HttpClient{
     }
     public put(url: string, data:any)
     {
-        return this._instance.put(url,data).then(data => {
+        return this._instance.put(url,data).then(response => {
+            const { data } = response
             return Promise.resolve(data);
         }).catch(error => {
             return Promise.reject(error);

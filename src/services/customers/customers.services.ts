@@ -1,5 +1,6 @@
 import { autoInjectable, inject } from 'tsyringe';
 import { CustomerType, CreateCustomer, UpdateCustomer, CreateIndividualCustomer, CreateCompanyCustomer, ReadIndividualCustomer, ReadCompanyCustomer } from '../../Interfaces/customer/customers.interface';
+import { Pagination } from '../../Interfaces/generic/generic.interface'
 import { HttpClient } from '../http/index';
 
 @autoInjectable()
@@ -28,14 +29,14 @@ export class CustomerService{
             return Promise.reject(error)
         }
     }
-    public async getAllCustomerRecords(page: number = 1, limit: number = 25): Promise<Array<ReadIndividualCustomer | ReadCompanyCustomer>> {
+    public async getAllCustomerRecords(page: number = 1, limit: number = 25): Promise<{data: Array<ReadIndividualCustomer | ReadCompanyCustomer>, pagination: Pagination}> {
         try {
-            let { data } = await this._httpClient.get(`/customers?pages=${page}&limit=${limit}`);
+            let { data, pagination } = await this._httpClient.get(`/customers?pages=${page}&limit=${limit}`);
             let results: Array<ReadCompanyCustomer | ReadIndividualCustomer> = [];
             data.forEach(customer => {
                 results.push(this.processCustomerRecord(customer));
             });
-            return Promise.resolve(results);
+            return Promise.resolve({ data: results, pagination});
         } catch (error) {
             return Promise.reject(error);
         }
