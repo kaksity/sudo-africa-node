@@ -61,21 +61,21 @@ describe('All Customer Operations',() => {
 
     it('Should Get all the Customers', async() => {
         
-        let allCustomers = await sudoInstance.customers.getAllCustomers();
+        let allCustomers = await sudoInstance.customers.getAllCustomerRecords();
         expect(allCustomers).to.be.an('array');
         
     });
     
     it('Should Get a Company customer', async() => {
         
-        let singleCustomer = await sudoInstance.customers.getCustomerById('61e3273de4d97fa8915b3749');
+        let singleCustomer = await sudoInstance.customers.getCustomerRecordById('61e3273de4d97fa8915b3749');
         expect(singleCustomer).to.be.an('object').to.have.property('company');
 
     });
 
     it('Should Get an Individual customer',async() => {
 
-        let singleCustomer = await sudoInstance.customers.getCustomerById('61e02642e5b97959404c324f');
+        let singleCustomer = await sudoInstance.customers.getCustomerRecordById('61e02642e5b97959404c324f');
         expect(singleCustomer).to.be.an('object').to.have.property('individual');
     });
 
