@@ -70,6 +70,17 @@ export interface CreateIndividualCustomer {
     billingAddress: BillingAddress
 }
 
+
+export interface UpdateIndividualCustomer {
+    type: CustomerType.INDIVIDUAL,
+    name: string,
+    phoneNumber: string,
+    emailAddress: string,
+    individual: Individual,
+    status: CustomerStatus,
+    billingAddress: BillingAddress
+}
+
 export interface CreateCompanyCustomer {
     type: CustomerType.COMPANY,
     name: string,

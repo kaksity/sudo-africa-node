@@ -1,5 +1,5 @@
 import { autoInjectable, inject } from 'tsyringe';
-import { CustomerType, CreateCustomer, UpdateCustomer, CreateIndividualCustomer, CreateCompanyCustomer, ReadIndividualCustomer, ReadCompanyCustomer } from '../../Interfaces/customer/customers.interface';
+import { CustomerType, CreateCustomer, UpdateCustomer, CreateIndividualCustomer, CreateCompanyCustomer, ReadIndividualCustomer, ReadCompanyCustomer, UpdateIndividualCustomer } from '../../Interfaces/customer/customers.interface';
 import { Pagination } from '../../Interfaces/generic/generic.interface'
 import { HttpClient } from '../http/index';
 
@@ -116,6 +116,16 @@ export class CustomerService{
             status: customer.status
         }
         return companyCustomer;
+    }
+    public async updateIndividualCustomerRecord(customerId: string, updateCustomer: UpdateIndividualCustomer): Promise<ReadIndividualCustomer> {
+        try
+        {
+            const { data: customer } = await this._httpClient.post('/customers', updateCustomer);
+            return this.processIndividualCustomerRecord(customer);
+        } catch(error) {
+            return Promise.reject(error);
+        }
+        
     }
     // async updateCustomer(updateCustomer: UpdateCustomer): Promise<ReadCustomer> {
     //     try {
